@@ -1,4 +1,4 @@
-package tp.appliSpring.exemple;
+package tp.appliSpring.exemplev2;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -6,23 +6,23 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class ExempleApp {
 
 	public static void main(String[] args) {
-		ApplicationContext contextSpring = new AnnotationConfigApplicationContext(ExempleConfig.class);
+		ApplicationContext contextSpring = new AnnotationConfigApplicationContext(ExempleConfigExplicite.class);
 		//contextSpring représente un ensemble de composants pris en charge par spring
 		//qui est initialisé selon la ou les classes de configurations.
 		
 		MonCalculateur monCalculateur = contextSpring.getBean(MonCalculateur.class);
-		System.out.println("4*4 ou 2*4="+monCalculateur.calculer(4));//4*4=16.0 ou autre 
+		System.out.println("4*4ou2*4="+monCalculateur.calculer(4));//4*4=16.0 ou autre 
 		
-		/*
+		
 		//le name/id "coordinateur" coorespond ici au nom de la méthode préfixée par @Bean dans ExempleConfig
-		//Coordinateur coordinateurPrisEnChargeParSpring = (Coordinateur) contextSpring.getBean("coordinateur");
-		Coordinateur coordinateurPrisEnChargeParSpring = contextSpring.getBean(Coordinateur.class);
-		coordinateurPrisEnChargeParSpring.calculerEtAfficher();
-		*/
+		//Coordinateur coordinateurAPrisEnChargeParSpring = (Coordinateur) contextSpring.getBean("coordinateur");
+		Coordinateur coordinateurAPrisEnChargeParSpring = contextSpring.getBean(Coordinateur.class);
+		coordinateurAPrisEnChargeParSpring.calculerEtAfficher();
 		
-		CoordinateurAvecInjectionParConstructeur coordinateurPrisEnChargeParSpring = 
+		
+		CoordinateurAvecInjectionParConstructeur coordinateurBPrisEnChargeParSpring = 
 				      contextSpring.getBean(CoordinateurAvecInjectionParConstructeur.class);
-		coordinateurPrisEnChargeParSpring.calculerEtAfficher();
+		coordinateurBPrisEnChargeParSpring.calculerEtAfficher();
 		
 		((AnnotationConfigApplicationContext) contextSpring).close();
 	}
