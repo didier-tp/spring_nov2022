@@ -1,8 +1,9 @@
 package tp.appliSpring.exemple;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component()
 //@Component("monAfficheurV2") //par defaut nom du bean = nom de la classe mais avec minuscule au debut 
 public class MonAfficheurV2 implements MonAfficheur {
 

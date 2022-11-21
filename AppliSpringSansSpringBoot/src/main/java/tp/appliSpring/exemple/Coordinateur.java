@@ -2,9 +2,12 @@ package tp.appliSpring.exemple;
 
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /*
@@ -17,10 +20,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class Coordinateur {
 	
+	@Value("${couleur.preferee}") //valeur qui sera lue dans un fichier .properties
+	                              //par exemple essai.properties si @PropertySource("classpath:/essai.properties") 
+								  //placé au dessus de la classe ExempleConfig
+	private String couleurPreferee;
+	
+	
 	@Autowired
 	//pour demander à spring d'intialiser la référence monAfficheur
 	//en pointant sur un composant Spring existant compatible avec le type MonAfficheur
 	@Qualifier("monAfficheurV2") //ou @Qualifier("monAfficheurV1")
+	//@Qualifier("${choix.afficheur.name}") NE FONCTIONNE PAS CAR PAS PREVU!!!
 	
 	//@Resource(name="monAfficheurV1")
 	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
@@ -31,7 +41,7 @@ public class Coordinateur {
 	 @Inject necessite un ajout dans pom.xml et est interprété comme @Autowired
 	 */
 	
-	@Autowired  //annotation specifique spring pour injection de dépendance
+	@Autowired()  //annotation specifique spring pour injection de dépendance
 	//@Resource  //vielle annotation standardisée de JEE (simple )
 	//@Inject    //annotation de JEE/DI/CDI (standard plus récent que @Resource mais plus complexe)
 	private MonCalculateur monCalculateur;
@@ -46,7 +56,7 @@ public class Coordinateur {
 	}
 	
 	public Coordinateur() {
-		System.out.println("dans le constructeur Coordinateur , monAfficheur="+monAfficheur);
+		System.out.println("dans le constructeur Coordinateur , monAfficheur="+monAfficheur + " , couleurPreferee="+couleurPreferee);
 	}
 
 	public Coordinateur(MonAfficheur monAfficheur) {
@@ -56,7 +66,7 @@ public class Coordinateur {
 	
 	@PostConstruct  //ressemble à ngOnInit() de angular
 	public void initialiser() {
-		System.out.println("dans initialiser() prefixée par  @PostConstruct, monAfficheur="+monAfficheur);
+		System.out.println("dans initialiser() prefixée par  @PostConstruct, monAfficheur="+monAfficheur + " , couleurPreferee="+couleurPreferee);
 	}
 
 	public void setMonAfficheur(MonAfficheur monAfficheur) {

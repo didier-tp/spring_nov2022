@@ -13,16 +13,16 @@ public class ExempleApp {
 		MonCalculateur monCalculateur = contextSpring.getBean(MonCalculateur.class);
 		System.out.println("4*4 ou 2*4="+monCalculateur.calculer(4));//4*4=16.0 ou autre 
 		
-		/*
+		
 		//le name/id "coordinateur" coorespond ici au nom de la méthode préfixée par @Bean dans ExempleConfig
 		//Coordinateur coordinateurPrisEnChargeParSpring = (Coordinateur) contextSpring.getBean("coordinateur");
 		Coordinateur coordinateurPrisEnChargeParSpring = contextSpring.getBean(Coordinateur.class);
 		coordinateurPrisEnChargeParSpring.calculerEtAfficher();
-		*/
+	
 		
-		CoordinateurAvecInjectionParConstructeur coordinateurPrisEnChargeParSpring = 
+		CoordinateurAvecInjectionParConstructeur coordinateur2PrisEnChargeParSpring = 
 				      contextSpring.getBean(CoordinateurAvecInjectionParConstructeur.class);
-		coordinateurPrisEnChargeParSpring.calculerEtAfficher();
+		coordinateur2PrisEnChargeParSpring.calculerEtAfficher();
 		
 		((AnnotationConfigApplicationContext) contextSpring).close();
 	}
