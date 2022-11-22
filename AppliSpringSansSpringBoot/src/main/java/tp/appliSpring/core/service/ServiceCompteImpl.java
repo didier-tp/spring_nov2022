@@ -14,6 +14,7 @@ import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.core.exception.SoldeInsuffisantException;
 
 @Service //classe de Service prise en charge par spring
+//@Transactional
 public class ServiceCompteImpl implements ServiceCompte{
 	
 	@Qualifier("jpa")
@@ -77,14 +78,14 @@ public class ServiceCompteImpl implements ServiceCompte{
 				throw new SoldeInsuffisantException("compte a débiter qui a un solde insuffisant : " + cptDeb);
 			
 			cptDeb.setSolde(cptDeb.getSolde() - montant);
-			//this.daoCompte.save(cptDeb); //appel de .save() possible et dans ce cas base modifiée temporairement seulement
+			this.daoCompte.save(cptDeb); //appel de .save() possible et dans ce cas base modifiée temporairement seulement
 			                               //avec rollback ultérieur possible en cas d'exception
 			
 			
 			//idem pour compte à créditer
 			Compte cptCred= this.daoCompte.findById(numCptCred);
 			cptCred.setSolde(cptCred.getSolde() + montant);
-			//this.daoCompte.save(cptCred)
+			this.daoCompte.save(cptCred);
 
 			
 			//en fin de transaction réussie (sans exception) , toutes les modification effectuées sur les objets
