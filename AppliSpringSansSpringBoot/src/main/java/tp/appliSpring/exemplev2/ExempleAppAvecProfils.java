@@ -6,9 +6,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class ExempleAppAvecProfils {
 
 	public static void main(String[] args) {
-		//System.setProperty("spring.profiles.active", "V1");
+		System.setProperty("spring.profiles.active", "V1");
 		//System.setProperty("spring.profiles.active", "V1,autresProfilsComplementaires");
-		System.setProperty("spring.profiles.active", "V2");
+		//System.setProperty("spring.profiles.active", "V2");
 		ApplicationContext contextSpring = new AnnotationConfigApplicationContext(ExempleConfigExpliciteAvecProfils.class);
 		//contextSpring représente un ensemble de composants pris en charge par spring
 		//qui est initialisé selon la ou les classes de configurations.

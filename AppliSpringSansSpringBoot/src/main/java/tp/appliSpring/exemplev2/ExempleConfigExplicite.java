@@ -16,14 +16,14 @@ public class ExempleConfigExplicite {
 	
 	@Value("${exemple.calculateur}")
 	private String calculateurClassName;
-	
+	/*
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer
 	 propertySourcesPlaceholderConfigurer(){
 			return new PropertySourcesPlaceholderConfigurer(); 
 			//pour pouvoir interpréter ${} in @Value()
 	}
-
+    */
 	
 	@Bean //pour que la chose construite soit prise en charge par Spring
     public MonAfficheur monAfficheur() {
