@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import tp.appliSpring.annotation.LogExecutionTime;
+
 /*
  * objet pris en charge par spring qui va 
  * coordonner :
@@ -46,6 +48,7 @@ public class Coordinateur {
 	//@Inject    //annotation de JEE/DI/CDI (standard plus récent que @Resource mais plus complexe)
 	private MonCalculateur monCalculateur;
 	
+	@LogExecutionTime
 	public void calculerEtAfficher() {
 		//v1 : calcul en direct
 		//v2 : calcul à déléguer à MonCalculateur

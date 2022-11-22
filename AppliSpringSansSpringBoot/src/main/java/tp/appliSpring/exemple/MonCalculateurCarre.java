@@ -4,6 +4,8 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import tp.appliSpring.annotation.Aff;
+
 @Component
 //@Lazy
 //@Scope("singleton")

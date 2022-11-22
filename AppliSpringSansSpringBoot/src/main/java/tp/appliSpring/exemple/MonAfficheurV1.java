@@ -2,7 +2,10 @@ package tp.appliSpring.exemple;
 
 import org.springframework.stereotype.Component;
 
+import tp.appliSpring.annotation.Aff;
+
 @Component
+@Aff
 public class MonAfficheurV1 implements MonAfficheur {
 
 	public void afficher(String message) {
