@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement() // "transactionManager" (not "txManager") is expected !!!
 @ComponentScan(basePackages = { "tp.appliSpring.core.dao" ,  "tp.appliSpring.core.service" ,  "tp.appliSpring.core.init"})
 public class DomainAndPersistenceConfig {
+	
+	@Value("${typebase}")
+	private String typeBase = "H2";
+	
+	@Value("${spring.jpa.action}")
+	private String actionJpa = "none"; // ou bien "drop-and-create"
 
 	// JpaVendorAdapter (Hibernate ou OpenJPA ou ...)
 	@Bean
@@ -27,8 +34,11 @@ public class DomainAndPersistenceConfig {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(false);
 		hibernateJpaVendorAdapter.setGenerateDdl(false);
-		//hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
-		hibernateJpaVendorAdapter.setDatabase(Database.H2);
+		switch(typeBase) {
+			case "MYSQL" : hibernateJpaVendorAdapter.setDatabase(Database.MYSQL); break;
+			case "H2" : hibernateJpaVendorAdapter.setDatabase(Database.H2); break;
+			case "POSTGRESQL" : hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL); break;
+		}
 		return hibernateJpaVendorAdapter;
 	}
 
@@ -40,7 +50,7 @@ public class DomainAndPersistenceConfig {
 		factory.setPackagesToScan("tp.appliSpring.core.entity");
 		factory.setDataSource(dataSource);
 		Properties jpaProperties = new Properties(); // java.util
-		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create"); //JPA>=2.1
+		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", actionJpa); //JPA>=2.1
 		factory.setJpaProperties(jpaProperties);
 		factory.afterPropertiesSet();
 		return factory.getObject();
