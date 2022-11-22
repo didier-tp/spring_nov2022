@@ -17,3 +17,6 @@ cd c:\references\spring_nov2022
 git pull
 ---------
 
+Exemple avec SpringData : projet AppliSpringBoot2
+du référentiel https://github.com/didier-mycontrib/spring5plus
+
