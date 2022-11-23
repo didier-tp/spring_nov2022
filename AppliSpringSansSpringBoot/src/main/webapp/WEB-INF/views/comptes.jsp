@@ -13,6 +13,7 @@ numero_client: ${numClient} <br/>
  </c:forEach>
  </table>
  <p><b>${message}</b></p>
- <p> <a href="virement" >nouveau virement</a> </p>
+ <p> <a href="virement" >nouveau virement</a> </p> 
+ <p> <a href="../../index.html" >retour index</a> </p> 
 </body>
 </html>

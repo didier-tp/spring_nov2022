@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.core.service.ServiceCompte;
+import tp.appliSpring.form.VirementForm;
 
 @Controller // cas particulier de @Component (pour crontroller web de spring mvc)
 @SessionAttributes(value = { "numClient" }) // ou bien client (de classe Client) en V2
@@ -37,6 +38,11 @@ public class CompteController {
 	public Long addClientInModel() {
 		return 0L; // valeur par defaut
 	}
+	
+	@ModelAttribute("virement")
+	public VirementForm addDefaultVirementInModel() {
+		return new VirementForm(); // valeur par defaut
+	}
 
 	@RequestMapping("/verifLogin")
 	public String verifLogin(Model model, @RequestParam(name = "numClient", required = false) Long numClient) {
@@ -56,9 +62,21 @@ public class CompteController {
 		return "comptes"; // pour demander la vue comptes.jsp
 	}
 
-	/*
-	 * @RequestMapping("/effectuerVirement") public String effectuerVirement(Model
-	 * model, ...A_COMPLETER_EN_TP….) { String message =""; try { // A CODER EN TP }
-	 * catch (Exception e) { // A CODER EN TP } } }
-	 */
+	
+	 @RequestMapping("/effectuerVirement")
+	 public String effectuerVirement(Model model,@ModelAttribute("virement") VirementForm virementForm) 
+	 {
+	String message =""; 
+	 try { 
+		serviceCompte.transferer(virementForm.getMontant(), virementForm.getNumCptDeb(), virementForm.getNumCptCred()); 
+		 message = "virement bien effectué" ;
+	   }
+	 catch (Exception e) { 
+		 message = "echec virement :" + e.getMessage();
+		} 
+	  model.addAttribute("message",message);
+	  return comptesDuClient(model);
+	 }
+	 
+	 
 }
