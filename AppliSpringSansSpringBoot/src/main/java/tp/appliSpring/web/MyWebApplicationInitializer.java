@@ -13,6 +13,9 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
+		//java -Dspring.profiles.active=dev,initDataSet possible dans .bat ou .sh 
+		//qui démarre tomcat
+		System.setProperty("spring.profiles.active", "initDataSet");
 		AnnotationConfigWebApplicationContext contextSpringWeb = 
 				new AnnotationConfigWebApplicationContext();
 		contextSpringWeb.register(MySpringApplication.class);
