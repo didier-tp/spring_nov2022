@@ -1,4 +1,4 @@
-package tp.appliSpring.form;
+package tp.appliSpring.web.form;
 
 public class VirementForm {
 	private Double montant;

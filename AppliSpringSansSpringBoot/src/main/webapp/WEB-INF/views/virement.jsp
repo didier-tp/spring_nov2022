@@ -4,7 +4,7 @@
 <body>
 <h3>virement interne pour le client connecté</h3>
  numClient = ${numClient} <br/>
-<form:form action="effectuerVirement" modelAttribute="virement" method="POST">
+<form:form action="effectuerVirement" modelAttribute="virementForm" method="POST">
 montant: <form:input  path="montant" /> <br/>
 numCptDeb: <form:input  path="numCptDeb" /> <br/>
 numCptCred<form:input  path="numCptCred" /> <br/>

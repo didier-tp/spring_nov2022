@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.core.service.ServiceCompte;
-import tp.appliSpring.form.VirementForm;
+import tp.appliSpring.web.form.VirementForm;
 
 @Controller // cas particulier de @Component (pour crontroller web de spring mvc)
 @SessionAttributes(value = { "numClient" }) // ou bien client (de classe Client) en V2
@@ -39,7 +39,7 @@ public class CompteController {
 		return 0L; // valeur par defaut
 	}
 	
-	@ModelAttribute("virement")
+	@ModelAttribute("virementForm")
 	public VirementForm addDefaultVirementInModel() {
 		return new VirementForm(); // valeur par defaut
 	}
@@ -64,7 +64,7 @@ public class CompteController {
 
 	
 	 @RequestMapping("/effectuerVirement")
-	 public String effectuerVirement(Model model,@ModelAttribute("virement") VirementForm virementForm) 
+	 public String effectuerVirement(Model model,@ModelAttribute("virementForm") VirementForm virementForm) 
 	 {
 	String message =""; 
 	 try { 
