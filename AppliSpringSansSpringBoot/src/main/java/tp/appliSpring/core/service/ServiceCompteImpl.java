@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tp.appliSpring.core.dao.DaoCompte;
 import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.core.exception.SoldeInsuffisantException;
+import tp.appliSpring.exception.NotFoundException;
 
 @Service //classe de Service prise en charge par spring
 //@Transactional
@@ -94,5 +95,13 @@ public class ServiceCompteImpl implements ServiceCompte{
 			throw new RuntimeException("echec virement " + e.getMessage() , e); //rollback se fait de façon fiable
 			//ou bien throw new ClasseExceptionPersonnaliseeHeritanttDeRuntimeException("echec virement" , e);
 		}
+	}
+
+	@Override
+	public Compte rechercherCompteParNumeroAvecEx(long numero) throws NotFoundException {
+		Compte compte =  daoCompte.findById(numero);
+		if(compte==null)
+		   throw new NotFoundException("compte pas trouvé pour numero="+numero);
+		return compte;
 	}
 }

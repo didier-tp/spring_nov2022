@@ -3,8 +3,6 @@ package tp.appliSpring.web.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +13,7 @@ import tp.appliSpring.converter.GenericConverter;
 import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.core.service.ServiceCompte;
 import tp.appliSpring.dto.CompteDto;
-import tp.appliSpring.dto.Message;
+import tp.appliSpring.exception.NotFoundException;
 @RestController
 @RequestMapping(value="/api-bank/compte" , headers="Accept=application/json")
 public class CompteRestCtrl {
@@ -31,6 +29,7 @@ public class CompteRestCtrl {
 	public CompteDto getCompteByNum(@PathVariable("numCompte") Long numCompte) { 
 	      return GenericConverter.map(serviceCompte.rechercherCompteParNumero(numCompte),CompteDto.class) ;
 	}*/
+	/*
 	public ResponseEntity<?> getCompteByNum(@PathVariable("numCompte") Long numCompte) { 
 	      Compte compte =serviceCompte.rechercherCompteParNumero(numCompte) ;
 	      if(compte == null)
@@ -38,8 +37,10 @@ public class CompteRestCtrl {
 	    			                              HttpStatus.NOT_FOUND); //404
 	      else 
 	    	  return new ResponseEntity<CompteDto>( GenericConverter.map(compte,CompteDto.class), HttpStatus.OK);//200
+	}*/
+	public CompteDto getCompteByNum(@PathVariable("numCompte") Long numCompte) throws NotFoundException{ 
+	      return GenericConverter.map(serviceCompte.rechercherCompteParNumeroAvecEx(numCompte),CompteDto.class) ;
 	}
-
 	
 	//URL http://localhost:8080/applispringSansSpringBoot/mvc/api-rest/compte
 	//ou  http://localhost:8080/applispringSansSpringBoot/mvc/api-rest/compte?soldeMini=120
