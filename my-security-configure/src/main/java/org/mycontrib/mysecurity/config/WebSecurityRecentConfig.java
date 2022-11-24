@@ -155,8 +155,10 @@ public class WebSecurityRecentConfig {
 
 		http.authorizeRequests().antMatchers(staticWhitelist).permitAll().antMatchers(SWAGGER_AUTH_WHITELIST)
 				.permitAll().antMatchers(HttpMethod.POST, "/api-login/public/login").permitAll()
-				.antMatchers(apiWhitelist).permitAll().antMatchers(HttpMethod.GET, apiReadonlyWhitelist).permitAll()
-				.antMatchers(apiProtectedlist).authenticated().and().cors() // enable CORS (avec @CrossOrigin sur class
+				.antMatchers(apiWhitelist).permitAll()
+				.antMatchers(HttpMethod.GET, apiReadonlyWhitelist).permitAll()
+				.antMatchers(apiProtectedlist).authenticated()
+				.and().cors() // enable CORS (avec @CrossOrigin sur class
 																			// @RestController)
 				.and().csrf().disable()
 				// If the user is not authenticated, returns 401
