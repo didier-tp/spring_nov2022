@@ -16,7 +16,7 @@ import tp.appliSpring.core.service.ServiceCompte;
 
 @ExtendWith(SpringExtension.class) //si junit5/jupiter
 @SpringBootTest(classes= {AppliSpringApplication.class})//reprendre la configuration de la classe principale
-//@ActiveProfiles({ "embeddedDB" , "dev" , "perf" })
+@ActiveProfiles({ "dev"  })
 public class TestServiceCompte {
 	
 	private static Logger logger = LoggerFactory.getLogger(TestServiceCompte.class);
