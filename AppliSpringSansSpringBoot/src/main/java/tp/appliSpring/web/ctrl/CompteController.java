@@ -24,10 +24,7 @@ public class CompteController {
 	@Autowired
 	private ServiceCompte serviceCompte;
 
-	@RequestMapping("/virement")
-	public String versVirement(Model model) {
-		return "virement"; // pour demander la vue virement.jsp
-	}
+	
 
 	@RequestMapping("/initLogin")
 	public String initLogin(Model model) {
@@ -60,6 +57,12 @@ public class CompteController {
 		List<Compte> comptesPourClient = serviceCompte.rechercherComptesDuClient(numClient);
 		model.addAttribute("listeComptes", comptesPourClient);
 		return "comptes"; // pour demander la vue comptes.jsp
+	}
+	
+	@RequestMapping("/virement")
+	public String versVirement(Model model) {
+		comptesDuClient(model);//store numClient et listeComptes dans model
+		return "virement"; // pour demander la vue virement.jsp
 	}
 
 	
